@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GNU 3
+
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -26,6 +28,17 @@ contract DSMathTest is DSTest, DSMath {
         assertEq(add(0, 0), 0);
         assertEq(add(0, 1), 1);
         assertEq(add(1, 1), 2);
+    }
+
+    function test_iadd() public {
+        assertEq(iadd(0, 0), 0);
+        assertEq(iadd(0, 1), 1);
+        assertEq(iadd(1, 1), 2);
+        int a = -1;
+        uint b = iadd(1, a+1);
+        int c = mul2(-2,-2);
+        assertEq(c, 4);
+        // assertEq(int(iadd(uint(1), -1)), -1);
     }
 
     function testFail_sub() public pure {

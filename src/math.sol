@@ -1,4 +1,5 @@
-/// math.sol -- mixin for inline numerical wizardry
+// SPDX-License-Identifier: GNU 3
+// math.sol -- mixin for inline numerical wizardry
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,6 +17,37 @@
 pragma solidity >0.4.13;
 
 contract DSMath {
+    int256 internal constant MAX_SD59x18 = 57896044618658097711785492504343953926634992332820282019728792003956564819967;
+    int256 internal constant MIN_SD59x18 = -57896044618658097711785492504343953926634992332820282019728792003956564819968;
+
+    /// @notice Multiplies two signed 59.18-decimal fixed-point numbers together, returning a new signed 59.18-decimal
+    /// @param x The multiplicand as a signed 59.18-decimal fixed-point number.
+    /// @param y The multiplier as a signed 59.18-decimal fixed-point number.
+    /// @return result The result as a signed 59.18-decimal fixed-point number.
+    /// https://github.com/paulrberg/prb-math/blob/v1.0.3/contracts/PRBMathCommon.sol - license WTFPL
+    function mul2(int256 x, int256 y) internal pure returns (int256 result) {
+        require(x > MIN_SD59x18);
+        require(y > MIN_SD59x18);
+
+        unchecked {
+            uint256 ax;
+            uint256 ay;
+            ax = x < 0 ? uint256(-x) : uint256(x);
+            ay = y < 0 ? uint256(-y) : uint256(y);
+
+            uint256 resultUnsigned = mul(ax, ay);
+            require(resultUnsigned <= uint256(MAX_SD59x18));
+
+            uint256 sx;
+            uint256 sy;
+            assembly {
+                sx := sgt(x, sub(0, 1))
+                sy := sgt(y, sub(0, 1))
+            }
+            result = sx ^ sy == 1 ? -int256(resultUnsigned) : int256(resultUnsigned);
+        }
+    }
+
     function add(uint x, uint y) internal pure returns (uint z) {
         require((z = x + y) >= x, "ds-math-add-overflow");
     }
@@ -24,6 +56,17 @@ contract DSMath {
     }
     function mul(uint x, uint y) internal pure returns (uint z) {
         require(y == 0 || (z = x * y) / y == x, "ds-math-mul-overflow");
+    }
+
+    function iadd(uint x, int y) internal pure returns (uint z) {
+        z = x + uint(y);
+        require(y >= 0 || z <= x, "ds-math-iadd-overflow");
+        require(y <= 0 || z >= x, "ds-math-iadd-overflow");
+    }
+    function isub(uint x, int y) internal pure returns (uint z) {
+        z = x - uint(y);
+        require(y <= 0 || z <= x);
+        require(y >= 0 || z >= x);
     }
 
     function min(uint x, uint y) internal pure returns (uint z) {
