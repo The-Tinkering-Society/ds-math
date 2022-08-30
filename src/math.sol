@@ -25,7 +25,7 @@ contract DSMath {
     /// @param y The multiplier as a signed 59.18-decimal fixed-point number.
     /// @return result The result as a signed 59.18-decimal fixed-point number.
     /// https://github.com/paulrberg/prb-math/blob/v1.0.3/contracts/PRBMathCommon.sol - license WTFPL
-    function mul2(int256 x, int256 y) internal pure returns (int256 result) {
+    function mul2(int x, int y) internal pure returns (int result) {
         require(x > MIN_SD59x18);
         require(y > MIN_SD59x18);
 

@@ -51,8 +51,8 @@
       }
     },
     "src/math.sol": {
-      "lastModificationDate": 1661876788119,
-      "contentHash": "7bdd3024cea52674f1e479b0c00e982a",
+      "lastModificationDate": 1661876863164,
+      "contentHash": "42d4c239614cd1be3dc8157f27d65d24",
       "sourceName": "src/math.sol",
       "solcConfig": {
         "settings": {
