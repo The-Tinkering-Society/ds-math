@@ -15,7 +15,7 @@
 
 pragma solidity >0.4.13;
 
-import "ds-test/test.sol";
+import "forge-std/Test.sol";
 import "./math.sol";
 
 contract DSMathTest is DSTest, DSMath {
@@ -31,7 +31,7 @@ contract DSMathTest is DSTest, DSMath {
     }
 
     function test_iadd() public {
-        uint r = iadd(100, a);
+        uint r = iadd(1, -10);
         console.log("r", r);
         // assertEq(b, 99);
         // int c = mul2(-2,-2);

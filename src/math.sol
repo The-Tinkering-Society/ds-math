@@ -59,9 +59,8 @@ contract DSMath {
     }
 
     function iadd(uint x, int y) internal pure returns (uint z) {
-        z = x + uint(-y);
-        // require(y >= 0 || z <= x, "ds-math-iadd-overflow");
-        // require(y <= 0 || z >= x, "ds-math-iadd-overflow");
+        z = (y >= 0) ? uint(y) + x : uint(-1 * y) - x;
+        require(z >= x, "ds-math-add-overflow");
     }
     function isub(uint x, int y) internal pure returns (uint z) {
         z = x - uint(y);
