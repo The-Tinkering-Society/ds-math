@@ -31,13 +31,11 @@ contract DSMathTest is DSTest, DSMath {
     }
 
     function test_iadd() public {
-        assertEq(iadd(0, 0), 0);
-        assertEq(iadd(0, 1), 1);
-        assertEq(iadd(1, 1), 2);
-        int a = -1;
-        uint b = iadd(1, a+1);
-        int c = mul2(-2,-2);
-        assertEq(c, 4);
+        uint r = iadd(100, a);
+        console.log("r", r);
+        // assertEq(b, 99);
+        // int c = mul2(-2,-2);
+        // assertEq(c, 4);
         // assertEq(int(iadd(uint(1), -1)), -1);
     }
 

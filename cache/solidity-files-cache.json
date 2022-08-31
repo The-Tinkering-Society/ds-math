@@ -51,8 +51,8 @@
       }
     },
     "src/math.sol": {
-      "lastModificationDate": 1661876863164,
-      "contentHash": "42d4c239614cd1be3dc8157f27d65d24",
+      "lastModificationDate": 1661931740066,
+      "contentHash": "a1b64ae8da7604cc1343b077d8ea28a1",
       "sourceName": "src/math.sol",
       "solcConfig": {
         "settings": {
@@ -90,8 +90,8 @@
       }
     },
     "src/math.t.sol": {
-      "lastModificationDate": 1661876653541,
-      "contentHash": "5c5be3fbc7108178fe191835dad1ff86",
+      "lastModificationDate": 1661931427005,
+      "contentHash": "0a26e7e83f881f8d95e8dda0dd2d45af",
       "sourceName": "src/math.t.sol",
       "solcConfig": {
         "settings": {
